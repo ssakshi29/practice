@@ -33,7 +33,6 @@ public class GameOfLifeBoard {
 
        for(int i=0;i<height;i++) {
            for (int j = 0; j < width; j++) {
-               System.out.println(i+ " "+j + " "+aliveCells.contains(new Cell(i, j)) + " " + countneighbourCells(i, j));
              if (!aliveCells.contains(new Cell(i, j)) && countneighbourCells(i, j) == 3)
                   nextBoardGeneration.aliveCell(Cell.createAliveCell(i, j));
                if (((countneighbourCells(i, j) == 2) || (countneighbourCells(i, j) == 3)) && aliveCells.contains(new Cell(i, j))) {
