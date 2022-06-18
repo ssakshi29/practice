@@ -34,7 +34,19 @@ public class GameOfLifeTest {
     }
 
 
+    @Test
+    void ChecksIfDeadCellsLiveWithExactlyThreeLiveNeighbours()
+    {
+        GameOfLifeBoard board = new GameOfLifeBoard(3,3);
+        board.aliveCell(Cell.createAliveCell(0,1));
+        board.aliveCell(Cell.createAliveCell(1,2));
+        board.aliveCell(Cell.createAliveCell(2,1));
 
+        GameOfLifeBoard nextBoardGeneration =board.nextGeneration();
+
+        assertTrue(nextBoardGeneration.isAlive(new Cell(1, 1)));
+
+    }
 
     @Test
     void ChecksIfAliveCellsDieWithMoreThanThreeLiveNeighbours()
@@ -50,7 +62,7 @@ public class GameOfLifeTest {
 
         assertFalse(nextBoardGeneration.isAlive(new Cell(1, 1)));
 
-    }
 
+    }
 
 }
