@@ -23,6 +23,10 @@ public class GameOfLifeBoard {
        return aliveCells.isEmpty();
    }
 
+    public boolean isAlive(Cell cell)
+    {
+        return aliveCells.contains(cell);
+    }
 
     public GameOfLifeBoard nextGeneration() {
        GameOfLifeBoard nextBoardGeneration = new GameOfLifeBoard(height,width);

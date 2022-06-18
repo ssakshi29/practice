@@ -19,6 +19,17 @@ public class GameOfLifeTest {
 
     }
 
+    @Test
+    void ChecksIfAliveCellsLiveWithTwoAliveNeighbourCells() {
+        GameOfLifeBoard board = new GameOfLifeBoard(3,3);
+        board.aliveCell(Cell.createAliveCell(0,1));
+        board.aliveCell(Cell.createAliveCell(1,1));
+        board.aliveCell(Cell.createAliveCell(2,1));
+
+
+        GameOfLifeBoard nextBoardGeneration =board.nextGeneration();
+        assertTrue(nextBoardGeneration.isAlive(new Cell(1, 2)));
+    }
 
 
 
