@@ -65,19 +65,19 @@ public class GameOfLifeTest {
         Cells.add(new Cell(1, 0));
         Cells.add(new Cell(1, 2));
 
-        System.out.println(Cells);
+
         List<Cell> expectedAliveCells = new LinkedList<>();
         expectedAliveCells.add(new Cell(1, 1));
         expectedAliveCells.add(new Cell(0, 1));
         expectedAliveCells.add(new Cell(2, 1));
 
-        System.out.println(expectedAliveCells);
+
 
         GameOfLife board = new GameOfLife(Cells);
 
         List<Cell> nextGenerationAliveCells = board.nextGeneration();
 
-        System.out.println(nextGenerationAliveCells);
+
 
         assertEquals(expectedAliveCells, nextGenerationAliveCells);
 
@@ -93,7 +93,7 @@ public class GameOfLifeTest {
         cells.add(new Cell(2, 3));
         cells.add(new Cell(2, 4));
 
-        System.out.println(cells);
+
         List<Cell> expectedAliveCells = new LinkedList<>();
         expectedAliveCells.add(new Cell(1, 1));
         expectedAliveCells.add(new Cell(2, 4));
@@ -102,14 +102,13 @@ public class GameOfLifeTest {
         expectedAliveCells.add(new Cell(1, 4));
         expectedAliveCells.add(new Cell(3, 3));
 
-        System.out.println(expectedAliveCells);
+
 
         GameOfLife board = new GameOfLife(cells);
 
         List<Cell> nextGeneration = board.nextGeneration();
 
 
-        System.out.println(nextGeneration);
         assertEquals(expectedAliveCells, nextGeneration);
     }
 

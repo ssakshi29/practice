@@ -28,9 +28,7 @@ public class Cell {
     }
 
     public List<Cell> activeNeighbours(List<Cell> cells, List<Cell> neighbours) {
-        return neighbours.stream()
-                .filter(cells::contains)
-                .collect(toList());
+        return neighbours.stream().filter(cells::contains).collect(toList());
     }
 
     @Override
