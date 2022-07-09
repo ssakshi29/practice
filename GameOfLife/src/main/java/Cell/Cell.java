@@ -1,36 +1,36 @@
 package Cell;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
-public class Cell {
+import static java.util.stream.Collectors.toList;
 
-    private final int row;
-    private final int column;
+public class Cell {
+    private final int xCoordinate;
+    private final int yCoordinate;
 
     public Cell(int row, int column) {
-        this.row = row;
-        this.column = column;
+        this.xCoordinate = row;
+        this.yCoordinate = column;
     }
 
-    public static Cell createAliveCell(int row ,int column){
-        return new Cell(row,column);
+    public List<Cell> neighbours() {
+        List<Cell> neighbourCells = new LinkedList<>();
+        for (int row = xCoordinate - 1; row <= xCoordinate + 1; row++) {
+            for (int column = yCoordinate - 1; column <= yCoordinate + 1; column++) {
+                if (row != xCoordinate || column != yCoordinate) {
+                    neighbourCells.add(new Cell(row, column));
+                }
+            }
+        }
+        return neighbourCells;
     }
 
-
-    public int[][] neighbours() {
-
-        int[][] neighbourCells = {
-                {row - 1, column - 1},
-                {row - 1, column},
-                {row - 1, column + 1},
-                {row, column + 1},
-                {row + 1, column + 1},
-                {row + 1, column},
-                {row + 1, column - 1},
-                {row, column - 1},
-        };
-     return neighbourCells;
+    public List<Cell> activeNeighbours(List<Cell> cells, List<Cell> neighbours) {
+        return neighbours.stream()
+                .filter(cells::contains)
+                .collect(toList());
     }
 
     @Override
@@ -38,11 +38,13 @@ public class Cell {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cell cell = (Cell) o;
-        return row == cell.row && column == cell.column;
+        return xCoordinate == cell.xCoordinate && yCoordinate == cell.yCoordinate;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(row, column);
+        return Objects.hash(xCoordinate, yCoordinate);
     }
+
+
 }

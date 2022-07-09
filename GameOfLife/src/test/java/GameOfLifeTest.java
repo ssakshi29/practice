@@ -1,68 +1,117 @@
 import Cell.Cell;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameOfLifeTest {
 
     @Test
-    void ChecksIfLiveCellsDieWhenLiveNeighbourCellsAreFewerThanTwo(){
+    void ShouldCheckNextGenerationBlockPatternInGrid() {
+        List<Cell> Cells = new LinkedList<>();
+        Cells.add(new Cell(1, 1));
+        Cells.add(new Cell(1, 2));
+        Cells.add(new Cell(2, 1));
+        Cells.add(new Cell(2, 2));
 
-        GameOfLifeBoard board = new GameOfLifeBoard(2,2);
-        board.aliveCell(Cell.createAliveCell(0,0));
-        board.aliveCell(Cell.createAliveCell(1,1));
-
-
-        GameOfLifeBoard nextBoardGeneration =board.nextGeneration();
-
-        assertTrue(nextBoardGeneration.allDead());
-
-    }
-
-    @Test
-    void ChecksIfAliveCellsLiveWithTwoAliveNeighbourCells() {
-        GameOfLifeBoard board = new GameOfLifeBoard(3,3);
-        board.aliveCell(Cell.createAliveCell(0,1));
-        board.aliveCell(Cell.createAliveCell(1,1));
-        board.aliveCell(Cell.createAliveCell(2,1));
+        List<Cell> expectedAliveCells = new LinkedList<>();
+        expectedAliveCells.add(new Cell(1, 1));
+        expectedAliveCells.add(new Cell(1, 2));
+        expectedAliveCells.add(new Cell(2, 1));
+        expectedAliveCells.add(new Cell(2, 2));
 
 
-        GameOfLifeBoard nextBoardGeneration =board.nextGeneration();
+        GameOfLife board = new GameOfLife(Cells);
 
-        assertTrue(nextBoardGeneration.isAlive(new Cell(1, 2)));
+        List<Cell> nextGenerationAliveCells = board.nextGeneration();
+
+        assertEquals(expectedAliveCells, nextGenerationAliveCells);
+
     }
 
 
     @Test
-    void ChecksIfDeadCellsLiveWithExactlyThreeLiveNeighbours()
-    {
-        GameOfLifeBoard board = new GameOfLifeBoard(3,3);
-        board.aliveCell(Cell.createAliveCell(0,1));
-        board.aliveCell(Cell.createAliveCell(1,2));
-        board.aliveCell(Cell.createAliveCell(2,1));
+    void ShouldCheckNextGenerationBoatPatternInGrid() {
+        List<Cell> Cells = new LinkedList<>();
+        Cells.add(new Cell(0, 1));
+        Cells.add(new Cell(1, 0));
+        Cells.add(new Cell(2, 1));
+        Cells.add(new Cell(0, 2));
+        Cells.add(new Cell(1, 2));
 
-        GameOfLifeBoard nextBoardGeneration =board.nextGeneration();
+        List<Cell> expectedAliveCells = new LinkedList<>();
+        expectedAliveCells.add(new Cell(0, 1));
+        expectedAliveCells.add(new Cell(1, 0));
+        expectedAliveCells.add(new Cell(2, 1));
+        expectedAliveCells.add(new Cell(0, 2));
+        expectedAliveCells.add(new Cell(1, 2));
 
-        assertTrue(nextBoardGeneration.isAlive(new Cell(1, 1)));
+
+        GameOfLife board = new GameOfLife(Cells);
+
+        List<Cell> nextGenerationAliveCells = board.nextGeneration();
+
+        assertEquals(expectedAliveCells, nextGenerationAliveCells);
+
+    }
+
+
+    @Test
+    void ShouldCheckNextGenerationBlinkerPatternInGrid() {
+        List<Cell> Cells = new LinkedList<>();
+        Cells.add(new Cell(1, 1));
+        Cells.add(new Cell(1, 0));
+        Cells.add(new Cell(1, 2));
+
+        System.out.println(Cells);
+        List<Cell> expectedAliveCells = new LinkedList<>();
+        expectedAliveCells.add(new Cell(1, 1));
+        expectedAliveCells.add(new Cell(0, 1));
+        expectedAliveCells.add(new Cell(2, 1));
+
+        System.out.println(expectedAliveCells);
+
+        GameOfLife board = new GameOfLife(Cells);
+
+        List<Cell> nextGenerationAliveCells = board.nextGeneration();
+
+        System.out.println(nextGenerationAliveCells);
+
+        assertEquals(expectedAliveCells, nextGenerationAliveCells);
 
     }
 
     @Test
-    void ChecksIfAliveCellsDieWithMoreThanThreeLiveNeighbours()
-    {
-        GameOfLifeBoard board = new GameOfLifeBoard(3,3);
-        board.aliveCell(Cell.createAliveCell(0,1));
-        board.aliveCell(Cell.createAliveCell(1,0));
-        board.aliveCell(Cell.createAliveCell(1,1));
-        board.aliveCell(Cell.createAliveCell(1,2));
-        board.aliveCell(Cell.createAliveCell(2,1));
+    void ShouldCheckNextGenerationToadPatternInGrid() {
+        List<Cell> cells = new LinkedList<>();
+        cells.add(new Cell(1, 1));
+        cells.add(new Cell(1, 2));
+        cells.add(new Cell(1, 3));
+        cells.add(new Cell(2, 2));
+        cells.add(new Cell(2, 3));
+        cells.add(new Cell(2, 4));
 
-        GameOfLifeBoard nextBoardGeneration =board.nextGeneration();
+        System.out.println(cells);
+        List<Cell> expectedAliveCells = new LinkedList<>();
+        expectedAliveCells.add(new Cell(1, 1));
+        expectedAliveCells.add(new Cell(2, 4));
+        expectedAliveCells.add(new Cell(0, 2));
+        expectedAliveCells.add(new Cell(2, 1));
+        expectedAliveCells.add(new Cell(1, 4));
+        expectedAliveCells.add(new Cell(3, 3));
 
-        assertFalse(nextBoardGeneration.isAlive(new Cell(1, 1)));
+        System.out.println(expectedAliveCells);
+
+        GameOfLife board = new GameOfLife(cells);
+
+        List<Cell> nextGeneration = board.nextGeneration();
 
 
+        System.out.println(nextGeneration);
+        assertEquals(expectedAliveCells, nextGeneration);
     }
+
 
 }
