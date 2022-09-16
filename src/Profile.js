@@ -16,6 +16,15 @@ function Profile() {
 
     return n;
   };
+
+  const random = () => {
+    let n = Math.floor(Math.random() * reviews.length);
+
+    if (n === index) n = index + 1;
+
+    setIndex(check(n));
+  };
+
   const nextPerson = () => {
     setIndex(check(index + 1));
   };
@@ -50,6 +59,7 @@ function Profile() {
         <button
           style={{ width: "200px", marginTop: "10px" }}
           className="btn btn-primary"
+          onClick={random}
         >
           Surprise
         </button>
