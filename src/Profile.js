@@ -7,9 +7,22 @@ function Profile() {
 
   // eslint-disable-next-line no-unused-vars
   const { id, name, job, image, text } = reviews[index];
-  const nextPerson = () => {};
+  const check = (number) => {
+    var n = number;
+    if (number < 0) {
+      n = reviews.length - 1;
+    }
+    if (number > reviews.length - 1) n = 0;
 
-  const prevPerson = () => {};
+    return n;
+  };
+  const nextPerson = () => {
+    setIndex(check(index + 1));
+  };
+
+  const prevPerson = () => {
+    setIndex(check(index - 1));
+  };
   return (
     <div>
       <div
